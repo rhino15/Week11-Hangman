@@ -10,7 +10,7 @@ this.checkCorrectGuess = function() {
 			}
 		}
 	};
-this.noDuplicatesCorrectArr = function() {
+ function noDuplicatesCorrectArr = function() {
 		for (var i = 0; i < this.correctGuessArr.length; i++) {
 			if (this.noDuplicatesArr.indexOf(this.correctGuessArr[i]) === -1) {
 				this.noDuplicatesArr.push(this.correctGuessArr[i]);

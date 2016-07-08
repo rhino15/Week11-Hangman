@@ -30,6 +30,8 @@ var playHangman = function() {
 		}]).then(function(answers) {
 
 			userGuesses.push(answers.letterGuessed);
+			var guardAgainstDuplicatesArr = noDuplicatesinUserGuesses(userGuesses);
+			
 			var findHowManyOfUserGuess = randomHangmanWord.checkIfLetterFound(answers.letterGuessed);
 			console.log(randomHangmanWord.wordRender());
 
@@ -39,23 +41,38 @@ var playHangman = function() {
 			} else {
 				console.log("You guessed right!!!");
 				if (randomHangmanWord.didWeFindTheWord()) {
-					console.log("You won!!!");
+					console.log("You won!!!\n");
+					console.log("The band was " + displayWord(randomHangmanWord) + "!");
 					return;
 				}
 			}
 			console.log("You have " + numGuessesRemaining + " guesses.");
 			console.log(randomHangmanWord.wordRender());
-			console.log("Here are the letters already guessed: " + userGuesses.join(", "));
+			console.log("Here are the letters already guessed: " + guardAgainstDuplicatesArr.join(", "));
 			playHangman();
 		})
 	} else {
 		console.log("Sorry, better luck next time.\n");
-		var showWord = "";
-		for (var i = 0; i < randomHangmanWord.correctLettersGuessed.length; i++) {
-			showWord += randomHangmanWord.correctLettersGuessed[i].letterGuessed;
-		}
-		console.log("The band was " + showWord);
+		console.log("The band was " + displayWord(randomHangmanWord) + "...");
 	}
+}
+//this will guard against any duplicates the user inputs
+function noDuplicatesinUserGuesses(userGuessesArr) {
+	var checkDuplicatesArr = [];
+	for (var i = 0; i < userGuessesArr.length; i++) {
+		if (checkDuplicatesArr.indexOf(userGuessesArr[i]) === -1) {
+			checkDuplicatesArr.push(userGuessesArr[i]);
+		}	
+	}
+	return checkDuplicatesArr;
+}
+//displays the word at end of game
+function displayWord(hangmanWord) {
+	var showWord = "";
+	for (var i = 0; i < hangmanWord.correctLettersGuessed.length; i++) {
+		showWord += hangmanWord.correctLettersGuessed[i].letterGuessed;
+	}
+	return showWord;
 }
 
 playHangman();
