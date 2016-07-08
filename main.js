@@ -11,16 +11,16 @@ var randomHangmanWord = new Word(wordBank.wordBank[Math.floor(Math.random() * wo
 randomHangmanWord.getLetters();
 console.log(randomHangmanWord.correctLettersGuessed);
 console.log(randomHangmanWord.checkIfLetterFound('e'));
-
+console.log(randomHangmanWord.correctLettersGuessed);
 console.log(randomHangmanWord.wordRender());
 
 //create word object here
-/*var playHangman = function() {
+var playHangman = function() {
 	if (!randomHangmanWord.didWeFindTheWord()) {
 		console.log("\nWelcome to Hangman\n");
 		inquirer.prompt([{
 			name
 		}])
 	}
-}*/
+}
 
