@@ -11,11 +11,12 @@ function Word(randomWord) {
 			var letterConstructor = new Letter(this.randomWord[i]);
 			this.correctLettersGuessed.push(letterConstructor);
 		}
-		if (this.didWeFindTheWord()) {
+		//console.log(this.correctLettersGuessed);
+		/*if (this.didWeFindTheWord()) {
 			return true;
 		} else {
 			return false;
-		}
+		}*/
 		
 	};
 
@@ -29,8 +30,8 @@ function Word(randomWord) {
 	this.checkIfLetterFound = function(guessLetter) {
 		var whatToReturn = 0;
 		for (var i = 0; i < this.correctLettersGuessed.length; i++) {
-			if (this.correctLettersGuessed[i] === guessLetter) {
-				guessLetter.appear = true;
+			if (this.correctLettersGuessed[i].letterGuessed === guessLetter) {
+				this.correctLettersGuessed[i].appear = true;
 				whatToReturn++;
 			}
 		}
@@ -40,10 +41,12 @@ function Word(randomWord) {
 	this.wordRender = function() {
 		var str = "";
 		for (var i = 0; i < this.correctLettersGuessed.length; i++) {
+			
 			if (this.checkIfLetterFound(this.correctLettersGuessed[i]).appear) {
-				str += this.correctLettersGuessed[i].letterRender();
+				console.log(this.correctLettersGuessed[i].letterRender());
+				str += this.correctLettersGuessed[i].letterGuessed;
 			} else {
-				str += "_";
+				str += "_ ";
 			}
 		}
 		return str;

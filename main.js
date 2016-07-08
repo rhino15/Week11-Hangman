@@ -8,6 +8,11 @@ var wordBank = new WordBank();
 var Word = require('./word.js');
 //create a new instance of a random word from the word bank
 var randomHangmanWord = new Word(wordBank.wordBank[Math.floor(Math.random() * wordBank.wordBank.length)]);
+randomHangmanWord.getLetters();
+console.log(randomHangmanWord.correctLettersGuessed);
+console.log(randomHangmanWord.checkIfLetterFound('e'));
+
+console.log(randomHangmanWord.wordRender());
 
 //create word object here
 /*var playHangman = function() {
