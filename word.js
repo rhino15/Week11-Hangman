@@ -40,11 +40,12 @@ function Word(randomWord) {
 	this.wordRender = function() {
 		var str = "";
 		for (var i = 0; i < this.correctLettersGuessed.length; i++) {
-			if (this.checkIfLetterFound(this.correctLettersGuessed[i]).appear)
+			if (this.checkIfLetterFound(this.correctLettersGuessed[i]).appear) {
 				str += this.correctLettersGuessed[i].letterRender();
 			} else {
 				str += "_";
 			}
+		}
 		return str;
 	};
 }

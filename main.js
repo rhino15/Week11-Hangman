@@ -10,12 +10,12 @@ var Word = require('./word.js');
 var randomHangmanWord = new Word(wordBank.wordBank[Math.floor(Math.random() * wordBank.wordBank.length)]);
 
 //create word object here
-var playHangman = function() {
+/*var playHangman = function() {
 	if (!randomHangmanWord.didWeFindTheWord()) {
 		console.log("\nWelcome to Hangman\n");
 		inquirer.prompt([{
 			name
 		}])
 	}
-}
+}*/
 
