@@ -27,29 +27,36 @@ var playHangman = function() {
 			type: 'text',
 			name: 'letterGuessed',
 			message: "Pick a letter to solve Hangman.",
-		}]).then(function(answers) {
-
-			userGuesses.push(answers.letterGuessed);
-			var guardAgainstDuplicatesArr = noDuplicatesinUserGuesses(userGuesses);
 			
-			var findHowManyOfUserGuess = randomHangmanWord.checkIfLetterFound(answers.letterGuessed);
-			console.log(randomHangmanWord.wordRender());
+		}]).then(function(answers) {
+			//checks to see if letter is valid
+			var isLetter = letterValidation(answers.letterGuessed);
+			if (isLetter) {
+				userGuesses.push(answers.letterGuessed);
+				var guardAgainstDuplicatesArr = noDuplicatesinUserGuesses(userGuesses);
+				
+				var findHowManyOfUserGuess = randomHangmanWord.checkIfLetterFound(answers.letterGuessed);
+				console.log(randomHangmanWord.wordRender());
 
-			if (findHowManyOfUserGuess === 0) {
-				console.log("You guessed wrong!\n");
-				numGuessesRemaining--;
-			} else {
-				console.log("You guessed right!!!");
-				if (randomHangmanWord.didWeFindTheWord()) {
-					console.log("You won!!!\n");
-					console.log("The band was " + displayWord(randomHangmanWord) + "!");
-					return;
+				if (findHowManyOfUserGuess === 0) {
+					console.log("You guessed wrong!\n");
+					numGuessesRemaining--;
+				} else {
+					console.log("You guessed right!!!");
+					if (randomHangmanWord.didWeFindTheWord()) {
+						console.log("You won!!!\n");
+						console.log("The band was " + displayWord(randomHangmanWord) + "!");
+						return;
+					}
 				}
+				console.log("You have " + numGuessesRemaining + " guesses.");
+				console.log(randomHangmanWord.wordRender());
+				console.log("Here are the letters already guessed: " + guardAgainstDuplicatesArr.join(", "));
+				playHangman();
+			} else {
+				console.log("That's not a letter. Please choose a letter");
+				playHangman();
 			}
-			console.log("You have " + numGuessesRemaining + " guesses.");
-			console.log(randomHangmanWord.wordRender());
-			console.log("Here are the letters already guessed: " + guardAgainstDuplicatesArr.join(", "));
-			playHangman();
 		})
 	} else {
 		console.log("Sorry, better luck next time.\n");
@@ -73,6 +80,16 @@ function displayWord(hangmanWord) {
 		showWord += hangmanWord.correctLettersGuessed[i].letterGuessed;
 	}
 	return showWord;
+}
+
+function letterValidation(letter) {
+	var validLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '];
+	for (var i = 0; i < validLetters.length; i++) {
+		if (validLetters[i] === letter) {
+			return true;
+		}
+	}
+	return false;
 }
 
 playHangman();
